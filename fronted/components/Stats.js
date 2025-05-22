@@ -63,29 +63,38 @@ const useCounter = (end) => {
   return [count, ref];
 };
 
+const StatItem = ({ icon, label, value, suffix }) => {
+  const [count, ref] = useCounter(value);
+
+  return (
+    <div
+      ref={ref}
+      className="bg-white shadow-xl rounded-2xl p-6 flex flex-col items-center hover:shadow-2xl transition-shadow duration-300"
+    >
+      <div className="mb-4">{icon}</div>
+      <h3 className="text-3xl font-extrabold text-blue-800">
+        {count}
+        <span className="text-blue-600 text-2xl">{suffix}</span>
+      </h3>
+      <p className="text-gray-600 mt-2 text-lg font-medium">{label}</p>
+    </div>
+  );
+};
+
 const SchoolStats = () => {
   return (
     <section className="bg-blue-50 py-16 px-4 text-center">
       <h2 className="text-4xl font-bold text-blue-900 mb-12">🏫 School Stats</h2>
       <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-        {stats.map(({ icon, label, value, suffix }, idx) => {
-          const [count, ref] = useCounter(value);
-
-          return (
-            <div
-              key={idx}
-              ref={ref}
-              className="bg-white shadow-xl rounded-2xl p-6 flex flex-col items-center hover:shadow-2xl transition-shadow duration-300"
-            >
-              <div className="mb-4">{icon}</div>
-              <h3 className="text-3xl font-extrabold text-blue-800">
-                {count}
-                <span className="text-blue-600 text-2xl">{suffix}</span>
-              </h3>
-              <p className="text-gray-600 mt-2 text-lg font-medium">{label}</p>
-            </div>
-          );
-        })}
+        {stats.map(({ icon, label, value, suffix }, idx) => (
+          <StatItem
+            key={idx}
+            icon={icon}
+            label={label}
+            value={value}
+            suffix={suffix}
+          />
+        ))}
       </div>
     </section>
   );

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 import {
   Facebook,
   Twitter,
@@ -9,6 +10,12 @@ import {
 } from 'lucide-react';
 
 const Footer = () => {
+  const router = useRouter();
+
+  const navigate = (path) => {
+    router.push(path);
+  };
+
   return (
     <footer className="bg-blue-900 text-white py-12 px-6">
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -24,10 +31,38 @@ const Footer = () => {
         <div>
           <h3 className="text-xl font-semibold mb-3">Quick Links</h3>
           <ul className="space-y-2 text-blue-200 text-sm">
-            <li><a href="/" className="hover:text-white">Home</a></li>
-            <li><a href="/about" className="hover:text-white">About Us</a></li>
-            <li><a href="/admissions" className="hover:text-white">Admissions</a></li>
-            <li><a href="/contact" className="hover:text-white">Contact</a></li>
+            <li>
+              <button
+                onClick={() => navigate('/')}
+                className="hover:text-white cursor-pointer bg-transparent border-none p-0 m-0"
+              >
+                Home
+              </button>
+            </li>
+            <li>
+              <button
+                onClick={() => navigate('/about')}
+                className="hover:text-white cursor-pointer bg-transparent border-none p-0 m-0"
+              >
+                About Us
+              </button>
+            </li>
+            <li>
+              <button
+                onClick={() => navigate('/admissions')}
+                className="hover:text-white cursor-pointer bg-transparent border-none p-0 m-0"
+              >
+                Admissions
+              </button>
+            </li>
+            <li>
+              <button
+                onClick={() => navigate('/contact')}
+                className="hover:text-white cursor-pointer bg-transparent border-none p-0 m-0"
+              >
+                Contact
+              </button>
+            </li>
           </ul>
         </div>
 
